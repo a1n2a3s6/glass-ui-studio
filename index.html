@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlassUI Studio — Glassmorphism CSS & Tailwind Generator</title>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Base Studio Surface & Typography */
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      background-color: #07090f;
+      color: #f1f5f9;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Subtle Studio Grid Backdrop */
+    .studio-bg-grid {
+      background-image: radial-gradient(rgba(148, 163, 184, 0.1) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* Animated Mesh Gradient Stage */
+    .mesh-stage {
+      background:
+        radial-gradient(at 14% 20%, rgba(79, 70, 229, 0.55) 0px, transparent 55%),
+        radial-gradient(at 86% 18%, rgba(236, 72, 153, 0.45) 0px, transparent 50%),
+        radial-gradient(at 78% 84%, rgba(6, 182, 212, 0.48) 0px, transparent 55%),
+        radial-gradient(at 18% 82%, rgba(16, 185, 129, 0.35) 0px, transparent 50%),
+        linear-gradient(135deg, #0b1021 0%, #111827 50%, #090d1a 100%);
+    }
+
+    /* Floating Soft Glowing Orbs */
+    @keyframes floatOrb1 {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      33% { transform: translate3d(42px, -28px, 0) scale(1.08); }
+      66% { transform: translate3d(-24px, 34px, 0) scale(0.94); }
+    }
+
+    @keyframes floatOrb2 {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      33% { transform: translate3d(-48px, 30px, 0) scale(1.1); }
+      66% { transform: translate3d(32px, -22px, 0) scale(0.92); }
+    }
+
+    @keyframes floatOrb3 {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(36px, 36px, 0) scale(1.12); }
+    }
+
+    @keyframes floatOrb4 {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-34px, -30px, 0) scale(1.06); }
+    }
+
+    .orb-1 { animation: floatOrb1 14s ease-in-out infinite; }
+    .orb-2 { animation: floatOrb2 17s ease-in-out infinite; }
+    .orb-3 { animation: floatOrb3 12s ease-in-out infinite; }
+    .orb-4 { animation: floatOrb4 19s ease-in-out infinite; }
+
+    /* Custom Range Slider Styling */
+    input[type='range'].studio-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 9999px;
+      background: #1e293b;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    input[type='range'].studio-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 9999px;
+      background: #f8fafc;
+      border: 2px solid #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.18), 0 2px 6px rgba(0, 0, 0, 0.45);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    input[type='range'].studio-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.28), 0 3px 10px rgba(0, 0, 0, 0.55);
+    }
+
+    input[type='range'].studio-slider:focus-visible::-webkit-slider-thumb {
+      box-shadow: 0 0 0 6px rgba(129, 140, 248, 0.45);
+    }
+
+    input[type='range'].studio-slider::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 9999px;
+      background: #f8fafc;
+      border: 2px solid #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.18), 0 2px 6px rgba(0, 0, 0, 0.45);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input[type='range'].studio-slider::-moz-range-thumb:hover {
+      transform: scale(1.12);
+    }
+
+    /* Native Color Picker Refinement */
+    input[type='color'].color-swatch-input {
+      -webkit-appearance: none;
+      appearance: none;
+      border: none;
+      padding: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+    input[type='color'].color-swatch-input::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+    input[type='color'].color-swatch-input::-webkit-color-swatch {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem;
+    }
+    input[type='color'].color-swatch-input::-moz-color-swatch {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem;
+    }
+
+    /* Smooth 3D Tilt Container for Preview Card */
+    .tilt-stage {
+      perspective: 1100px;
+    }
+    .tilt-target {
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 0.12s ease,
+        border-color 0.12s ease,
+        border-radius 0.12s ease,
+        box-shadow 0.12s ease;
+      will-change: transform;
+    }
+
+    /* Custom Subtle Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0f1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    /* Toast Entrance / Exit */
+    .toast-hidden {
+      opacity: 0;
+      transform: translate(-50%, 16px) scale(0.96);
+      pointer-events: none;
+    }
+    .toast-visible {
+      opacity: 1;
+      transform: translate(-50%, 0) scale(1);
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body class="min-h-screen studio-bg-grid selection:bg-indigo-500/30 selection:text-indigo-200 flex flex-col">
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-30 border-b border-white/[0.07] bg-[#07090f]/80 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+      <!-- Brand Identity -->
+      <div class="flex items-center gap-3 min-w-0">
+        <div
+          class="relative w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500/30 via-fuchsia-500/20 to-cyan-400/30 border border-white/15 flex items-center justify-center shadow-lg shadow-indigo-500/10 shrink-0"
+          aria-hidden="true"
+        >
+          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3.5" y="3.5" width="11" height="11" rx="3" class="fill-indigo-400/25 stroke-indigo-300" />
+            <rect x="9.5" y="9.5" width="11" height="11" rx="3" class="fill-white/15 stroke-white" />
+          </svg>
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2">
+            <h1 class="text-base sm:text-lg font-semibold tracking-tight text-white truncate">
+              GlassUI Studio
+            </h1>
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-indigo-500/15 text-indigo-300 border border-indigo-400/20">
+              v2.0
+            </span>
+          </div>
+          <p class="hidden sm:block text-xs text-slate-400 truncate">
+            Interactive Glassmorphism CSS &amp; Tailwind Generator
+          </p>
+        </div>
+      </div>
+
+      <!-- Header Action Buttons -->
+      <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        <button
+          id="btn-randomize"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-indigo-500/15 hover:bg-indigo-500/25 active:scale-[0.98] text-indigo-200 border border-indigo-400/25 transition-all cursor-pointer"
+          title="Generate random glassmorphism settings"
+        >
+          <svg class="w-4 h-4 text-indigo-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 3 21 3 21 8"></polyline>
+            <line x1="4" y1="20" x2="21" y2="3"></line>
+            <polyline points="21 16 21 21 16 21"></polyline>
+            <line x1="15" y1="15" x2="21" y2="21"></line>
+            <line x1="4" y1="4" x2="9" y2="9"></line>
+          </svg>
+          <span>Randomize</span>
+        </button>
+
+        <button
+          id="btn-reset"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white/[0.04] hover:bg-white/[0.09] active:scale-[0.98] text-slate-300 hover:text-white border border-white/10 transition-all cursor-pointer"
+          title="Reset to default Frosted Ice settings"
+        >
+          <svg class="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- LEFT PANEL: Controls & Presets -->
+      <aside class="lg:col-span-5 xl:col-span-4 space-y-5">
+        <!-- Parameters Card -->
+        <section class="rounded-2xl bg-[#0e121d]/90 border border-white/[0.08] p-5 sm:p-6 shadow-2xl shadow-black/40">
+          <div class="flex items-center justify-between mb-5">
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.8)]"></span>
+              Glass Properties
+            </h2>
+            <span id="active-preset-badge" class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-white/[0.06] text-slate-300 border border-white/10">
+              Frosted Ice
+            </span>
+          </div>
+
+          <!-- Sliders Stack -->
+          <div class="space-y-5">
+            <!-- Blur Slider -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label for="slider-blur" class="text-sm font-medium text-slate-200">Backdrop Blur</label>
+                <span id="val-blur" class="font-mono text-xs px-2 py-0.5 rounded-md bg-slate-900/90 text-indigo-300 border border-white/10">16px</span>
+              </div>
+              <input id="slider-blur" type="range" min="0" max="40" step="1" value="16" class="studio-slider" />
+            </div>
+
+            <!-- Opacity Slider -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label for="slider-opacity" class="text-sm font-medium text-slate-200">Surface Opacity</label>
+                <span id="val-opacity" class="font-mono text-xs px-2 py-0.5 rounded-md bg-slate-900/90 text-indigo-300 border border-white/10">18%</span>
+              </div>
+              <input id="slider-opacity" type="range" min="0" max="100" step="1" value="18" class="studio-slider" />
+            </div>
+
+            <!-- Saturation Slider -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label for="slider-saturation" class="text-sm font-medium text-slate-200">Backdrop Saturation</label>
+                <span id="val-saturation" class="font-mono text-xs px-2 py-0.5 rounded-md bg-slate-900/90 text-indigo-300 border border-white/10">160%</span>
+              </div>
+              <input id="slider-saturation" type="range" min="100" max="200" step="5" value="160" class="studio-slider" />
+            </div>
+
+            <!-- Border Opacity Slider -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label for="slider-border" class="text-sm font-medium text-slate-200">Border Opacity</label>
+                <span id="val-border" class="font-mono text-xs px-2 py-0.5 rounded-md bg-slate-900/90 text-indigo-300 border border-white/10">28%</span>
+              </div>
+              <input id="slider-border" type="range" min="0" max="100" step="1" value="28" class="studio-slider" />
+            </div>
+
+            <!-- Border Radius Slider -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label for="slider-radius" class="text-sm font-medium text-slate-200">Border Radius</label>
+                <span id="val-radius" class="font-mono text-xs px-2 py-0.5 rounded-md bg-slate-900/90 text-indigo-300 border border-white/10">24px</span>
+              </div>
+              <input id="slider-radius" type="range" min="0" max="48" step="1" value="24" class="studio-slider" />
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="my-6 border-t border-white/[0.07]"></div>
+
+          <!-- Tint Color Picker -->
+          <div>
+            <div class="flex items-center justify-between mb-2.5">
+              <label for="color-picker" class="text-sm font-medium text-slate-200">Tint Color</label>
+              <span class="text-xs text-slate-400">Glass surface hue</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <label class="relative flex items-center justify-center w-11 h-10 rounded-xl bg-slate-900 border border-white/15 p-1 cursor-pointer hover:border-white/30 transition-colors shrink-0">
+                <input id="color-picker" type="color" value="#ffffff" class="color-swatch-input w-full h-full" aria-label="Pick glass tint color" />
+              </label>
+
+              <div class="flex-1 flex items-center bg-slate-900/90 border border-white/10 rounded-xl px-3 h-10 focus-within:border-indigo-400/60 transition-colors">
+                <span class="text-slate-500 font-mono text-xs mr-1.5 select-none">HEX</span>
+                <input
+                  id="color-hex-input"
+                  type="text"
+                  value="#FFFFFF"
+                  maxlength="7"
+                  spellcheck="false"
+                  class="w-full bg-transparent text-sm font-mono text-slate-100 uppercase focus:outline-none"
+                  aria-label="Tint color hex code"
+                />
+              </div>
+            </div>
+
+            <!-- Quick Tint Swatches -->
+            <div class="mt-3 flex items-center gap-2 flex-wrap" id="quick-swatches" role="group" aria-label="Quick tint color swatches">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Presets Card -->
+        <section class="rounded-2xl bg-[#0e121d]/90 border border-white/[0.08] p-5 sm:p-6 shadow-2xl shadow-black/40">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-fuchsia-400 shadow-[0_0_8px_rgba(232,121,249,0.8)]"></span>
+              Studio Presets
+            </h2>
+            <span class="text-xs text-slate-500">One-click styles</span>
+          </div>
+
+          <div id="presets-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2.5">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+      </aside>
+
+      <!-- RIGHT PANEL: Live Preview Stage & Output Code Box -->
+      <div class="lg:col-span-7 xl:col-span-8 space-y-6">
+
+        <!-- Live Preview Stage Container -->
+        <section class="rounded-2xl bg-[#0e121d]/90 border border-white/[0.08] overflow-hidden shadow-2xl shadow-black/40">
+          <!-- Preview Top Bar with Template Switcher -->
+          <div class="px-4 sm:px-5 py-3.5 border-b border-white/[0.07] flex flex-wrap items-center justify-between gap-3 bg-[#0b0f19]/80">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="text-xs sm:text-sm font-medium text-slate-200">Live Preview</span>
+            </div>
+
+            <!-- Segmented Template Switcher -->
+            <div
+              class="inline-flex items-center p-1 rounded-xl bg-slate-950/90 border border-white/10"
+              role="tablist"
+              aria-label="Preview template switcher"
+            >
+              <button
+                type="button"
+                role="tab"
+                data-template="card"
+                aria-selected="true"
+                class="template-tab px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer bg-indigo-500 text-white shadow-sm"
+              >
+                Card
+              </button>
+              <button
+                type="button"
+                role="tab"
+                data-template="modal"
+                aria-selected="false"
+                class="template-tab px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer text-slate-400 hover:text-white"
+              >
+                Modal
+              </button>
+              <button
+                type="button"
+                role="tab"
+                data-template="navbar"
+                aria-selected="false"
+                class="template-tab px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer text-slate-400 hover:text-white"
+              >
+                Navbar
+              </button>
+            </div>
+          </div>
+
+          <!-- Animated Mesh Gradient Stage -->
+          <div
+            id="preview-stage"
+            class="relative mesh-stage min-h-[380px] sm:min-h-[430px] p-5 sm:p-8 md:p-10 flex items-center justify-center overflow-hidden select-none"
+          >
+            <!-- Soft Floating Orbs -->
+            <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+              <div class="orb-1 absolute -top-12 -left-10 w-64 h-64 rounded-full bg-indigo-500/55 blur-3xl"></div>
+              <div class="orb-2 absolute -bottom-16 -right-8 w-72 h-72 rounded-full bg-fuchsia-500/45 blur-3xl"></div>
+              <div class="orb-3 absolute top-1/3 right-1/4 w-48 h-48 rounded-full bg-cyan-400/45 blur-3xl"></div>
+              <div class="orb-4 absolute bottom-1/4 left-1/4 w-44 h-44 rounded-full bg-amber-400/35 blur-3xl"></div>
+              <!-- Subtle Geometric Accent Shapes to Highlight Blur Refraction -->
+              <div class="absolute top-10 right-14 w-16 h-16 rounded-2xl border border-white/20 bg-gradient-to-br from-white/25 to-transparent rotate-12 opacity-60"></div>
+              <div class="absolute bottom-12 left-12 w-12 h-12 rounded-full bg-gradient-to-tr from-cyan-300/60 to-indigo-400/60 opacity-70"></div>
+            </div>
+
+            <!-- TEMPLATE 1: Sleek Glass Credit / Profile Card -->
+            <div id="tpl-card" class="tilt-stage relative z-10 w-full max-w-[400px]">
+              <div
+                data-glass-surface
+                id="glass-card-surface"
+                class="tilt-target relative p-6 sm:p-7 text-white overflow-hidden"
+              >
+                <!-- Subtle Top-Left Specular Highlight -->
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.18] via-transparent to-black/[0.12]"></div>
+
+                <div class="relative z-10 flex flex-col justify-between min-h-[200px] sm:min-h-[215px]">
+                  <!-- Card Header -->
+                  <div class="flex items-start justify-between gap-4">
+                    <div class="flex items-center gap-2.5">
+                      <!-- Metallic EMV Chip -->
+                      <div class="w-10 h-7 rounded-md bg-gradient-to-br from-amber-200/90 via-yellow-300/80 to-amber-500/80 border border-white/40 flex items-center justify-center shadow-inner">
+                        <div class="w-6 h-4 border border-amber-900/30 rounded-sm grid grid-cols-2 gap-0.5 p-0.5">
+                          <span class="border-r border-amber-900/25"></span>
+                          <span></span>
+                        </div>
+                      </div>
+                      <!-- Contactless Icon -->
+                      <svg class="w-5 h-5 text-white/75" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M8.5 16.5a5 5 0 0 1 0-9" />
+                        <path d="M12 19a9 9 0 0 1 0-14" />
+                        <path d="M15.5 21a13 13 0 0 1 0-18" />
+                      </svg>
+                    </div>
+
+                    <div class="text-right">
+                      <span class="text-xs font-semibold uppercase tracking-[0.2em] text-white/90">GlassPay</span>
+                      <p class="text-[10px] text-white/60 tracking-wider">INFINITE</p>
+                    </div>
+                  </div>
+
+                  <!-- Card Number -->
+                  <div class="my-6">
+                    <p class="font-mono text-lg sm:text-xl tracking-[0.18em] text-white/95 drop-shadow-sm">
+                      4921 &nbsp;•••• &nbsp;•••• &nbsp;8420
+                    </p>
+                  </div>
+
+                  <!-- Card Footer -->
+                  <div class="flex items-end justify-between gap-4">
+                    <div>
+                      <p class="text-[10px] uppercase tracking-widest text-white/60 mb-0.5">Card Holder</p>
+                      <p class="text-sm font-medium tracking-wide text-white/95">ELENA VANCE</p>
+                    </div>
+
+                    <div class="flex items-end gap-5">
+                      <div>
+                        <p class="text-[10px] uppercase tracking-widest text-white/60 mb-0.5">Expires</p>
+                        <p class="font-mono text-sm text-white/95">09/29</p>
+                      </div>
+                      <!-- Dual Circle Brand Mark -->
+                      <div class="flex items-center -space-x-2" aria-hidden="true">
+                        <span class="w-6 h-6 rounded-full bg-rose-400/80 border border-white/25"></span>
+                        <span class="w-6 h-6 rounded-full bg-amber-300/80 border border-white/25"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TEMPLATE 2: Glassmorphic Modal Dialog -->
+            <div id="tpl-modal" class="hidden relative z-10 w-full max-w-[430px]">
+              <div
+                data-glass-surface
+                class="relative p-6 sm:p-7 text-white overflow-hidden transition-all duration-150"
+              >
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.15] via-transparent to-black/[0.12]"></div>
+
+                <div class="relative z-10">
+                  <div class="flex items-start justify-between gap-4 mb-4">
+                    <div class="w-11 h-11 rounded-2xl bg-white/15 border border-white/25 flex items-center justify-center shadow-lg">
+                      <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5" />
+                        <path d="M2 12l10 5 10-5" />
+                      </svg>
+                    </div>
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-white/15 text-white/90 border border-white/20">
+                      Workspace Ready
+                    </span>
+                  </div>
+
+                  <h3 class="text-lg sm:text-xl font-semibold tracking-tight text-white mb-2">
+                    Deploy to Production?
+                  </h3>
+                  <p class="text-sm leading-relaxed text-white/75 mb-5">
+                    Your glassmorphic design tokens and responsive components are verified. Publishing will update live edge nodes globally.
+                  </p>
+
+                  <div class="flex items-center justify-between text-xs text-white/75 bg-black/20 border border-white/15 rounded-xl px-3.5 py-2.5 mb-6">
+                    <span>Build bundle</span>
+                    <span class="font-mono text-white/95">14.2 kB gzipped</span>
+                  </div>
+
+                  <div class="flex items-center justify-end gap-2.5">
+                    <button
+                      type="button"
+                      class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-colors cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-900 hover:bg-slate-100 shadow-lg shadow-black/20 transition-colors cursor-pointer"
+                    >
+                      Deploy Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TEMPLATE 3: Floating Glass Navigation Bar -->
+            <div id="tpl-navbar" class="hidden relative z-10 w-full max-w-[600px] flex flex-col items-center gap-6">
+              <nav
+                data-glass-surface
+                class="w-full px-4 sm:px-5 py-3 text-white flex items-center justify-between gap-3 transition-all duration-150"
+                aria-label="Sample glass navigation bar"
+              >
+                <!-- Brand -->
+                <div class="flex items-center gap-2 shrink-0">
+                  <span class="w-7 h-7 rounded-lg bg-white/20 border border-white/30 flex items-center justify-center font-bold text-xs">
+                    G
+                  </span>
+                  <span class="text-sm font-semibold tracking-tight">GlassUI</span>
+                </div>
+
+                <!-- Nav Links -->
+                <div class="hidden sm:flex items-center gap-5 text-xs font-medium text-white/80">
+                  <span class="text-white">Overview</span>
+                  <span class="hover:text-white transition-colors cursor-pointer">Components</span>
+                  <span class="hover:text-white transition-colors cursor-pointer">Tokens</span>
+                  <span class="hover:text-white transition-colors cursor-pointer">Pricing</span>
+                </div>
+
+                <!-- CTA Button -->
+                <button
+                  type="button"
+                  class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-900 hover:bg-slate-100 shadow-md transition-colors cursor-pointer shrink-0"
+                >
+                  Get Started
+                </button>
+              </nav>
+
+              <!-- Subtle Background Page Context Under Navbar -->
+              <div class="text-center max-w-md px-2 pointer-events-none opacity-85">
+                <span class="inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-white/70 mb-2">
+                  Floating Navigation Context
+                </span>
+                <p class="text-xl sm:text-2xl font-semibold tracking-tight text-white/95 leading-snug">
+                  Frosted surfaces that float effortlessly above vibrant content.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Output Code Box -->
+        <section class="rounded-2xl bg-[#0e121d]/90 border border-white/[0.08] overflow-hidden shadow-2xl shadow-black/40">
+          <!-- Code Tabs & Copy Action -->
+          <div class="px-4 sm:px-5 py-3 border-b border-white/[0.07] flex flex-wrap items-center justify-between gap-3 bg-[#0b0f19]/80">
+            <div class="inline-flex items-center p-1 rounded-xl bg-slate-950/90 border border-white/10" role="tablist" aria-label="Code output format">
+              <button
+                type="button"
+                role="tab"
+                data-code-tab="css"
+                aria-selected="true"
+                class="code-tab px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer bg-white/10 text-white"
+              >
+                Vanilla CSS
+              </button>
+              <button
+                type="button"
+                role="tab"
+                data-code-tab="tailwind"
+                aria-selected="false"
+                class="code-tab px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer text-slate-400 hover:text-white"
+              >
+                Tailwind CSS
+              </button>
+            </div>
+
+            <button
+              id="btn-copy-code"
+              type="button"
+              class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-medium bg-indigo-500 hover:bg-indigo-400 active:scale-[0.98] text-white shadow-lg shadow-indigo-500/20 transition-all cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy Code</span>
+            </button>
+          </div>
+
+          <!-- Code Display Area -->
+          <div class="p-4 sm:p-5 bg-[#080b13] overflow-x-auto">
+            <pre class="font-mono text-xs sm:text-[13px] leading-relaxed text-slate-200"><code id="code-output"></code></pre>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Minimal Studio Footer -->
+  <footer class="border-t border-white/[0.06] py-5 px-4 text-center text-xs text-slate-500">
+    GlassUI Studio &bull; Zero-dependency Glassmorphism Generator for CSS &amp; Tailwind
+  </footer>
+
+  <!-- Animated "Copied!" Toast Notification -->
+  <div
+    id="toast"
+    role="status"
+    aria-live="polite"
+    class="toast-hidden fixed bottom-6 left-1/2 z-50 flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-slate-900/95 border border-emerald-400/35 text-emerald-200 shadow-2xl shadow-black/60 backdrop-blur-md transition-all duration-200"
+  >
+    <span class="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </span>
+    <span id="toast-message" class="text-xs sm:text-sm font-medium text-white">Copied to clipboard!</span>
+  </div>
+
+  <!-- Application Logic -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* =====================================================================
+         1. PRESETS & DEFAULT STATE
+      ===================================================================== */
+      const PRESETS = [
+        {
+          id: 'frosted-ice',
+          name: 'Frosted Ice',
+          dot: 'linear-gradient(135deg, #e0f2fe, #ffffff)',
+          blur: 16,
+          opacity: 18,
+          saturation: 160,
+          borderOpacity: 28,
+          radius: 24,
+          tint: '#ffffff',
+        },
+        {
+          id: 'obsidian-glass',
+          name: 'Obsidian Glass',
+          dot: 'linear-gradient(135deg, #0f172a, #334155)',
+          blur: 20,
+          opacity: 48,
+          saturation: 140,
+          borderOpacity: 16,
+          radius: 20,
+          tint: '#0f172a',
+        },
+        {
+          id: 'sunset-glow',
+          name: 'Sunset Glow',
+          dot: 'linear-gradient(135deg, #fb7185, #fbbf24)',
+          blur: 18,
+          opacity: 22,
+          saturation: 185,
+          borderOpacity: 32,
+          radius: 28,
+          tint: '#ff7e6b',
+        },
+        {
+          id: 'emerald-mist',
+          name: 'Emerald Mist',
+          dot: 'linear-gradient(135deg, #10b981, #34d399)',
+          blur: 14,
+          opacity: 20,
+          saturation: 170,
+          borderOpacity: 26,
+          radius: 22,
+          tint: '#10b981',
+        },
+        {
+          id: 'neon-cyber',
+          name: 'Neon Cyber',
+          dot: 'linear-gradient(135deg, #8b5cf6, #06b6d4)',
+          blur: 24,
+          opacity: 24,
+          saturation: 200,
+          borderOpacity: 40,
+          radius: 16,
+          tint: '#7c3aed',
+        },
+      ];
+
+      const QUICK_SWATCHES = [
+        { hex: '#ffffff', label: 'Pure White' },
+        { hex: '#0f172a', label: 'Deep Slate' },
+        { hex: '#6366f1', label: 'Indigo' },
+        { hex: '#ec4899', label: 'Pink' },
+        { hex: '#06b6d4', label: 'Cyan' },
+        { hex: '#10b981', label: 'Emerald' },
+        { hex: '#f59e0b', label: 'Amber' },
+      ];
+
+      const state = {
+        blur: PRESETS[0].blur,
+        opacity: PRESETS[0].opacity,
+        saturation: PRESETS[0].saturation,
+        borderOpacity: PRESETS[0].borderOpacity,
+        radius: PRESETS[0].radius,
+        tint: PRESETS[0].tint,
+        activePresetId: PRESETS[0].id,
+        activeTemplate: 'card',
+        activeCodeTab: 'css',
+      };
+
+      /* =====================================================================
+         2. DOM REFERENCES
+      ===================================================================== */
+      const els = {
+        sliderBlur: document.getElementById('slider-blur'),
+        sliderOpacity: document.getElementById('slider-opacity'),
+        sliderSaturation: document.getElementById('slider-saturation'),
+        sliderBorder: document.getElementById('slider-border'),
+        sliderRadius: document.getElementById('slider-radius'),
+        valBlur: document.getElementById('val-blur'),
+        valOpacity: document.getElementById('val-opacity'),
+        valSaturation: document.getElementById('val-saturation'),
+        valBorder: document.getElementById('val-border'),
+        valRadius: document.getElementById('val-radius'),
+        colorPicker: document.getElementById('color-picker'),
+        colorHexInput: document.getElementById('color-hex-input'),
+        quickSwatches: document.getElementById('quick-swatches'),
+        presetsGrid: document.getElementById('presets-grid'),
+        activePresetBadge: document.getElementById('active-preset-badge'),
+        templateTabs: document.querySelectorAll('.template-tab'),
+        codeTabs: document.querySelectorAll('.code-tab'),
+        glassSurfaces: document.querySelectorAll('[data-glass-surface]'),
+        tplCard: document.getElementById('tpl-card'),
+        tplModal: document.getElementById('tpl-modal'),
+        tplNavbar: document.getElementById('tpl-navbar'),
+        cardTiltTarget: document.getElementById('glass-card-surface'),
+        codeOutput: document.getElementById('code-output'),
+        btnCopy: document.getElementById('btn-copy-code'),
+        btnRandomize: document.getElementById('btn-randomize'),
+        btnReset: document.getElementById('btn-reset'),
+        toast: document.getElementById('toast'),
+        toastMessage: document.getElementById('toast-message'),
+      };
+
+      let toastTimer = null;
+
+      /* =====================================================================
+         3. COLOR & FORMATTING UTILITIES
+      ===================================================================== */
+      function normalizeHex(hex) {
+        const clean = String(hex || '').trim().replace(/^#/, '');
+        if (/^[0-9a-fA-F]{3}$/.test(clean)) {
+          return (
+            '#' +
+            clean
+              .split('')
+              .map((c) => c + c)
+              .join('')
+              .toLowerCase()
+          );
+        }
+        if (/^[0-9a-fA-F]{6}$/.test(clean)) {
+          return '#' + clean.toLowerCase();
+        }
+        return null;
+      }
+
+      function hexToRgb(hex) {
+        const normalized = normalizeHex(hex) || '#ffffff';
+        const num = parseInt(normalized.slice(1), 16);
+        return {
+          r: (num >> 16) & 255,
+          g: (num >> 8) & 255,
+          b: num & 255,
+        };
+      }
+
+      function formatAlpha(percent) {
+        const val = Number((percent / 100).toFixed(2));
+        return val === 0 ? '0' : val === 1 ? '1' : String(val);
+      }
+
+      function updateSliderTrackFill(slider) {
+        const min = Number(slider.min);
+        const max = Number(slider.max);
+        const val = Number(slider.value);
+        const pct = ((val - min) / (max - min)) * 100;
+        slider.style.background = `linear-gradient(to right, #6366f1 0%, #818cf8 ${pct}%, #1e293b ${pct}%, #1e293b 100%)`;
+      }
+
+      /* =====================================================================
+         4. CODE GENERATION (VANILLA CSS & TAILWIND CSS)
+      ===================================================================== */
+      function getRawCode() {
+        const { r, g, b } = hexToRgb(state.tint);
+        const bgAlpha = formatAlpha(state.opacity);
+        const borderAlpha = formatAlpha(state.borderOpacity);
+        const hex = normalizeHex(state.tint) || '#ffffff';
+
+        if (state.activeCodeTab === 'css') {
+          return `.glass-surface {
+  background: rgba(${r}, ${g}, ${b}, ${bgAlpha});
+  backdrop-filter: blur(${state.blur}px) saturate(${state.saturation}%);
+  -webkit-backdrop-filter: blur(${state.blur}px) saturate(${state.saturation}%);
+  border-radius: ${state.radius}px;
+  border: 1px solid rgba(255, 255, 255, ${borderAlpha});
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+}`;
+        }
+
+        // Tailwind CSS v3+ utility classes with arbitrary values
+        const bgClass =
+          state.opacity === 0
+            ? 'bg-transparent'
+            : `bg-[${hex}]/[${bgAlpha}]`;
+        const blurClass =
+          state.blur === 0
+            ? 'backdrop-blur-none'
+            : `backdrop-blur-[${state.blur}px]`;
+        const satClass = `backdrop-saturate-[${state.saturation}%]`;
+        const radiusClass =
+          state.radius === 0 ? 'rounded-none' : `rounded-[${state.radius}px]`;
+        const borderClass =
+          state.borderOpacity === 0
+            ? 'border-0'
+            : `border border-white/[${borderAlpha}]`;
+        const shadowClass = 'shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]';
+
+        return `${bgClass} ${blurClass} ${satClass} ${radiusClass} ${borderClass} ${shadowClass}`;
+      }
+
+      function renderHighlightedCode() {
+        const raw = getRawCode();
+
+        if (state.activeCodeTab === 'css') {
+          // Lightweight syntax highlighting for Vanilla CSS
+          const lines = raw.split('\n').map((line) => {
+            if (line.includes('{') || line.includes('}')) {
+              return `<span class="text-indigo-300">${escapeHtml(line)}</span>`;
+            }
+            const parts = line.split(':');
+            if (parts.length >= 2) {
+              const prop = parts[0];
+              const val = parts.slice(1).join(':');
+              return `<span class="text-sky-300">${escapeHtml(prop)}</span>:<span class="text-emerald-300">${escapeHtml(val)}</span>`;
+            }
+            return escapeHtml(line);
+          });
+          els.codeOutput.innerHTML = lines.join('\n');
+        } else {
+          // Highlight each Tailwind utility token clearly
+          const tokens = raw
+            .split(' ')
+            .map((tok) => `<span class="text-cyan-300">${escapeHtml(tok)}</span>`)
+            .join(' ');
+          els.codeOutput.innerHTML = `<span class="text-slate-500">&lt;div class="</span>${tokens}<span class="text-slate-500">"&gt;&lt;/div&gt;</span>`;
+        }
+      }
+
+      function escapeHtml(str) {
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      /* =====================================================================
+         5. RENDER UI & LIVE PREVIEW
+      ===================================================================== */
+      function applyGlassStyles() {
+        const { r, g, b } = hexToRgb(state.tint);
+        const bgAlpha = formatAlpha(state.opacity);
+        const borderAlpha = formatAlpha(state.borderOpacity);
+        const backdropVal = `blur(${state.blur}px) saturate(${state.saturation}%)`;
+
+        els.glassSurfaces.forEach((surface) => {
+          surface.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${bgAlpha})`;
+          surface.style.backdropFilter = backdropVal;
+          surface.style.webkitBackdropFilter = backdropVal;
+          surface.style.borderRadius = `${state.radius}px`;
+          surface.style.border = `1px solid rgba(255, 255, 255, ${borderAlpha})`;
+          surface.style.boxShadow =
+            '0 8px 32px 0 rgba(0, 0, 0, 0.36), inset 0 1px 0 0 rgba(255, 255, 255, 0.14)';
+        });
+      }
+
+      function syncControlsFromState() {
+        els.sliderBlur.value = state.blur;
+        els.sliderOpacity.value = state.opacity;
+        els.sliderSaturation.value = state.saturation;
+        els.sliderBorder.value = state.borderOpacity;
+        els.sliderRadius.value = state.radius;
+
+        els.valBlur.textContent = `${state.blur}px`;
+        els.valOpacity.textContent = `${state.opacity}%`;
+        els.valSaturation.textContent = `${state.saturation}%`;
+        els.valBorder.textContent = `${state.borderOpacity}%`;
+        els.valRadius.textContent = `${state.radius}px`;
+
+        [
+          els.sliderBlur,
+          els.sliderOpacity,
+          els.sliderSaturation,
+          els.sliderBorder,
+          els.sliderRadius,
+        ].forEach(updateSliderTrackFill);
+
+        const hex = normalizeHex(state.tint) || '#ffffff';
+        els.colorPicker.value = hex;
+        if (document.activeElement !== els.colorHexInput) {
+          els.colorHexInput.value = hex.toUpperCase();
+        }
+
+        // Preset badge & active highlight
+        const activePreset = PRESETS.find((p) => p.id === state.activePresetId);
+        els.activePresetBadge.textContent = activePreset ? activePreset.name : 'Custom';
+
+        document.querySelectorAll('.preset-btn').forEach((btn) => {
+          const isActive = btn.dataset.presetId === state.activePresetId;
+          btn.classList.toggle('border-indigo-400/60', isActive);
+          btn.classList.toggle('bg-indigo-500/15', isActive);
+          btn.classList.toggle('border-white/[0.08]', !isActive);
+          btn.classList.toggle('bg-white/[0.025]', !isActive);
+        });
+      }
+
+      function updateAll() {
+        syncControlsFromState();
+        applyGlassStyles();
+        renderHighlightedCode();
+      }
+
+      /* =====================================================================
+         6. RENDER PRESETS & QUICK SWATCHES
+      ===================================================================== */
+      function buildPresetsUI() {
+        els.presetsGrid.innerHTML = '';
+        PRESETS.forEach((preset) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.dataset.presetId = preset.id;
+          btn.className =
+            'preset-btn group flex items-center gap-3 w-full px-3.5 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.025] hover:bg-white/[0.07] hover:border-white/20 text-left transition-all cursor-pointer active:scale-[0.98]';
+
+          btn.innerHTML = `
+            <span
+              class="w-6 h-6 rounded-full shrink-0 border border-white/25 shadow-sm transition-transform group-hover:scale-110"
+              style="background: ${preset.dot};"
+              aria-hidden="true"
+            ></span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-xs sm:text-sm font-medium text-slate-100 truncate">${preset.name}</span>
+              <span class="block text-[11px] font-mono text-slate-400 truncate">${preset.blur}px &bull; ${preset.opacity}%</span>
+            </span>
+          `;
+
+          btn.addEventListener('click', () => {
+            applyPreset(preset);
+          });
+
+          els.presetsGrid.appendChild(btn);
+        });
+      }
+
+      function buildQuickSwatches() {
+        els.quickSwatches.innerHTML = '';
+        QUICK_SWATCHES.forEach((swatch) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.title = swatch.label;
+          btn.setAttribute('aria-label', `Set tint color to ${swatch.label}`);
+          btn.className =
+            'w-6 h-6 rounded-lg border border-white/20 hover:scale-110 active:scale-95 transition-transform cursor-pointer shadow-sm';
+          btn.style.backgroundColor = swatch.hex;
+          btn.addEventListener('click', () => {
+            state.tint = swatch.hex;
+            state.activePresetId = null;
+            updateAll();
+          });
+          els.quickSwatches.appendChild(btn);
+        });
+      }
+
+      function applyPreset(preset) {
+        state.blur = preset.blur;
+        state.opacity = preset.opacity;
+        state.saturation = preset.saturation;
+        state.borderOpacity = preset.borderOpacity;
+        state.radius = preset.radius;
+        state.tint = preset.tint;
+        state.activePresetId = preset.id;
+        updateAll();
+      }
+
+      /* =====================================================================
+         7. TEMPLATE & CODE TAB SWITCHING
+      ===================================================================== */
+      function setTemplate(templateKey) {
+        state.activeTemplate = templateKey;
+
+        els.tplCard.classList.toggle('hidden', templateKey !== 'card');
+        els.tplModal.classList.toggle('hidden', templateKey !== 'modal');
+        els.tplNavbar.classList.toggle('hidden', templateKey !== 'navbar');
+
+        els.templateTabs.forEach((tab) => {
+          const isActive = tab.dataset.template === templateKey;
+          tab.setAttribute('aria-selected', String(isActive));
+          tab.classList.toggle('bg-indigo-500', isActive);
+          tab.classList.toggle('text-white', isActive);
+          tab.classList.toggle('shadow-sm', isActive);
+          tab.classList.toggle('text-slate-400', !isActive);
+          tab.classList.toggle('hover:text-white', !isActive);
+        });
+      }
+
+      function setCodeTab(tabKey) {
+        state.activeCodeTab = tabKey;
+
+        els.codeTabs.forEach((tab) => {
+          const isActive = tab.dataset.codeTab === tabKey;
+          tab.setAttribute('aria-selected', String(isActive));
+          tab.classList.toggle('bg-white/10', isActive);
+          tab.classList.toggle('text-white', isActive);
+          tab.classList.toggle('text-slate-400', !isActive);
+          tab.classList.toggle('hover:text-white', !isActive);
+        });
+
+        renderHighlightedCode();
+      }
+
+      /* =====================================================================
+         8. COPY TO CLIPBOARD & TOAST NOTIFICATION
+      ===================================================================== */
+      function showToast(message) {
+        els.toastMessage.textContent = message;
+        els.toast.classList.remove('toast-hidden');
+        els.toast.classList.add('toast-visible');
+
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          els.toast.classList.remove('toast-visible');
+          els.toast.classList.add('toast-hidden');
+        }, 2200);
+      }
+
+      function copyActiveCode() {
+        const textToCopy = getRawCode();
+        try {
+          const textarea = document.createElement('textarea');
+          textarea.value = textToCopy;
+          textarea.setAttribute('readonly', '');
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          textarea.style.left = '-9999px';
+          document.body.appendChild(textarea);
+          textarea.select();
+          textarea.setSelectionRange(0, textarea.value.length);
+          const success = document.execCommand('copy');
+          document.body.removeChild(textarea);
+
+          if (success) {
+            showToast(
+              state.activeCodeTab === 'css'
+                ? 'Copied Vanilla CSS!'
+                : 'Copied Tailwind classes!'
+            );
+          } else {
+            showToast('Unable to copy automatically.');
+          }
+        } catch (err) {
+          showToast('Copy failed — please copy manually.');
+        }
+      }
+
+      /* =====================================================================
+         9. RANDOMIZE & RESET ACTIONS
+      ===================================================================== */
+      function randomizeGlass() {
+        const randInt = (min, max) =>
+          Math.floor(Math.random() * (max - min + 1)) + min;
+        const palette = [
+          '#ffffff',
+          '#0f172a',
+          '#6366f1',
+          '#a855f7',
+          '#ec4899',
+          '#06b6d4',
+          '#10b981',
+          '#f59e0b',
+          '#38bdf8',
+        ];
+
+        state.blur = randInt(8, 32);
+        state.opacity = randInt(10, 42);
+        state.saturation = randInt(24, 40) * 5; // 120% - 200% in steps of 5
+        state.borderOpacity = randInt(14, 48);
+        state.radius = randInt(10, 38);
+        state.tint = palette[randInt(0, palette.length - 1)];
+        state.activePresetId = null;
+
+        updateAll();
+        showToast('Randomized glass settings!');
+      }
+
+      function resetGlass() {
+        applyPreset(PRESETS[0]);
+        showToast('Reset to Frosted Ice');
+      }
+
+      /* =====================================================================
+         10. SUBTLE 3D TILT MICRO-INTERACTION FOR CARD TEMPLATE
+      ===================================================================== */
+      function bindCardTilt() {
+        const card = els.cardTiltTarget;
+        if (!card) return;
+
+        card.addEventListener('pointermove', (e) => {
+          if (e.pointerType !== 'mouse') return;
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          const rotateY = x * 10;
+          const rotateX = -y * 10;
+          card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.015)`;
+        });
+
+        card.addEventListener('pointerleave', () => {
+          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+        });
+      }
+
+      /* =====================================================================
+         11. EVENT LISTENERS & INITIALIZATION
+      ===================================================================== */
+      function bindEvents() {
+        els.sliderBlur.addEventListener('input', (e) => {
+          state.blur = Number(e.target.value);
+          state.activePresetId = null;
+          updateAll();
+        });
+
+        els.sliderOpacity.addEventListener('input', (e) => {
+          state.opacity = Number(e.target.value);
+          state.activePresetId = null;
+          updateAll();
+        });
+
+        els.sliderSaturation.addEventListener('input', (e) => {
+          state.saturation = Number(e.target.value);
+          state.activePresetId = null;
+          updateAll();
+        });
+
+        els.sliderBorder.addEventListener('input', (e) => {
+          state.borderOpacity = Number(e.target.value);
+          state.activePresetId = null;
+          updateAll();
+        });
+
+        els.sliderRadius.addEventListener('input', (e) => {
+          state.radius = Number(e.target.value);
+          state.activePresetId = null;
+          updateAll();
+        });
+
+        els.colorPicker.addEventListener('input', (e) => {
+          state.tint = e.target.value;
+          state.activePresetId = null;
+          updateAll();
+        });
+
+        els.colorHexInput.addEventListener('input', (e) => {
+          const parsed = normalizeHex(e.target.value);
+          if (parsed) {
+            state.tint = parsed;
+            state.activePresetId = null;
+            updateAll();
+          }
+        });
+
+        els.colorHexInput.addEventListener('blur', () => {
+          els.colorHexInput.value = (normalizeHex(state.tint) || '#ffffff').toUpperCase();
+        });
+
+        els.templateTabs.forEach((tab) => {
+          tab.addEventListener('click', () => setTemplate(tab.dataset.template));
+        });
+
+        els.codeTabs.forEach((tab) => {
+          tab.addEventListener('click', () => setCodeTab(tab.dataset.codeTab));
+        });
+
+        els.btnCopy.addEventListener('click', copyActiveCode);
+        els.btnRandomize.addEventListener('click', randomizeGlass);
+        els.btnReset.addEventListener('click', resetGlass);
+      }
+
+      // Bootstrap Studio
+      buildPresetsUI();
+      buildQuickSwatches();
+      bindEvents();
+      bindCardTilt();
+      updateAll();
+    })();
+  </script>
+</body>
+</html>
