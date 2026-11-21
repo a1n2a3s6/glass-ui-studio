@@ -1,7 +1,7 @@
 # GlassUI Studio
 
 <p>
-  <img src="https://img.shields.io/badge/365%20Days%20Challenge-Day%204%2F365-06B6D4?style=for-the-badge" alt="Day 1/365" />
+  <img src="https://img.shields.io/badge/365%20Days%20Challenge-Day%201%2F365-06B6D4?style=for-the-badge" alt="Day 1/365" />
   <img src="https://img.shields.io/badge/Stack-Vanilla%20JS%20%7C%20Neural%20Net%20%7C%20Canvas%20%7C%20Tailwind-10B981?style=for-the-badge" alt="Tech Stack" />
 </p>
 
